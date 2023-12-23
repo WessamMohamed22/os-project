@@ -1,0 +1,27 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: my-first-deployment
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: os
+  template:
+    metadata:
+      labels:
+        app: os
+    spec:
+      containers:
+      - name: nginx-container
+        image: wessammohamed/nginx-test
+        imagePullPolicy: IfNotPresent
+        resources:
+          limits:
+            memory: "512Mi"
+            cpu: "1"
+          requests:
+            memory: "100Mi"
+        ports:
+          - containerPort: 80
+         
