@@ -3,26 +3,18 @@ on:
     branches:
       - master
 
-
-
-
-
-
-
 jobs:
   build:
     runs-on: ubuntu-latest
 
-
     steps:
-
       - uses: actions/checkout@v3
 
       - name: "Login to Docker hub"
-        run: docker login --username ${{ secrets.DOCKER_USERNAME }} --password ${{ secrets.DOCKER_TOKEN }}
+        run: docker login -u ${{ secrets.DOCKER_USERNAME }} -p ${{ secrets.DOCKER_PASSWORD }} 
 
       - name: "Building Docker image"
-        run: docker build -t ${{ secrets.DOCKER_USERNAME }}/nginx-test .
+        run: docker build -t ${{ secrets.DOCKER_USERNAME }}/nginx-test:latest .
 
       - name: "Pushing to Docker hub"
-        run: docker push ${{ secrets.DOCKER_USERNAME }}/nginx-test
+        run: docker push ${{ secrets.DOCKER_USERNAME }}/nginx-test:latest
